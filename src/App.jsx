@@ -11,6 +11,7 @@ import PCBService from './PCBService';
 import Team from './Team';
 import Products from './Products';
 import Hydrophone from './Hydrophone';
+import NotFound from './NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import SEOHead from './components/SEOHead';
 import SkipLink from './components/SkipLink';
@@ -56,6 +57,7 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/products" element={<Products />} />
         <Route path="/hydrophone" element={<Hydrophone />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
