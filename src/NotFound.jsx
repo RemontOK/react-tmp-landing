@@ -32,15 +32,6 @@ const NotFound = () => {
               <Link to="/" className="not-found-link primary">
                 Главная страница
               </Link>
-              <Link to="/products" className="not-found-link">
-                Наша продукция
-              </Link>
-              <Link to="/production" className="not-found-link">
-                Производство
-              </Link>
-              <Link to="/team" className="not-found-link">
-                Команда
-              </Link>
             </div>
             
             <div className="not-found-search">
