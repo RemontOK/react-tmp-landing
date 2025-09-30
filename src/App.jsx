@@ -21,6 +21,15 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 function App() {
   const location = useLocation();
   const isMainPage = location.pathname === '/' || location.pathname === '';
+  
+  // Список валидных маршрутов
+  const validRoutes = ['/', '/products', '/production', '/team', '/hydrophone', '/pcb-service', '/project', '/projects'];
+  const isValidRoute = validRoutes.includes(location.pathname);
+
+  // Если это невалидный маршрут, показываем 404
+  if (!isValidRoute && !isMainPage) {
+    return <NotFound />;
+  }
 
   // Если это главная страница, показываем Hero с интро
   if (isMainPage) {
