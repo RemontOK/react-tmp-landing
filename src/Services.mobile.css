@@ -1,0 +1,7 @@
+/* === Мобильные стили для Services (до 900px включительно) === */
+
+@media (max-width: 900px) {
+  .services-list { grid-template-columns: 1fr; gap: 16px; }
+  .service-card { min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; padding: 18px 8px 14px 8px; }
+  .services-container { padding: 32px 16px; box-sizing: border-box; }
+} 

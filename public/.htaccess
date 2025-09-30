@@ -1,0 +1,88 @@
+# Включаем сжатие
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# Кеширование статических файлов
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Изображения
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  
+  # Видео
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/webm "access plus 1 year"
+  ExpiresByType video/m4v "access plus 1 year"
+  
+  # CSS и JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  
+  # HTML
+  ExpiresByType text/html "access plus 1 day"
+</IfModule>
+
+# Заголовки безопасности
+<IfModule mod_headers.c>
+  # Защита от XSS
+  Header always set X-XSS-Protection "1; mode=block"
+  
+  # Защита от MIME-sniffing
+  Header always set X-Content-Type-Options "nosniff"
+  
+  # Защита от clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+  
+  # HSTS (HTTPS Strict Transport Security)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  
+  # Referrer Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Правила для SPA (Single Page Application)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Если файл или директория существуют, используем их
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  
+  # Для всех остальных запросов возвращаем index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Блокируем доступ к служебным файлам
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Блокируем доступ к package.json и другим конфигурационным файлам
+<FilesMatch "^(package\.json|package-lock\.json|vite\.config\.js|eslint\.config\.js|server\.js|README\.md|\.gitignore)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Разрешаем доступ к sitemap и robots.txt
+<FilesMatch "^(sitemap\.xml|robots\.txt)$">
+  Order Allow,Deny
+  Allow from all
+</FilesMatch> 

@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+  .partners-logos-marquee { height: 100px; }
+  .partner-logo { min-width: 120px; height: 70px; padding: 10px; margin: 0 20px; }
+  .logo-block { height: 35px; font-size: 11px; }
+  .logo-name { font-size: 0.65rem; max-width: 100px; }
+}
+
+@media (max-width: 480px) {
+  .partners-logos-marquee { height: 80px; }
+  .partner-logo { min-width: 100px; height: 60px; padding: 8px; margin: 0 15px; }
+  .logo-block { height: 30px; font-size: 10px; }
+  .logo-name { font-size: 0.6rem; max-width: 80px; }
+} 

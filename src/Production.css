@@ -1,0 +1,619 @@
+/* === СТРАНИЦА ПРОИЗВОДСТВО === */
+
+/* Анимация плавного рассеивания черного фона */
+@keyframes blackFadeOut {
+  0% {
+    background: rgba(0, 0, 0, 1);
+  }
+  25% {
+    background: rgba(0, 0, 0, 0.75);
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  75% {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+/* Слайдер Hero секции */
+.production-hero-slider-wrapper {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  animation: blackFadeOut 1.2s ease-out;
+}
+
+.production-hero-slider-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.production-hero-slider-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.production-hero-slider-img,
+.production-hero-slider-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s ease-in-out;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.production-hero-slider-video.transitioning {
+  opacity: 0.1;
+  transform: scale(1.05);
+  filter: blur(2px) brightness(0.8);
+}
+
+
+
+
+
+
+
+.production-hero-slider-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 2;
+}
+
+.production-hero-slider-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.6s ease-in-out;
+  animation: fadeIn 0.3s ease-out 0.3s both;
+}
+
+.production-hero-slider-content.transitioning {
+  opacity: 0.7;
+  transform: translate(-50%, -50%) scale(0.95);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+
+
+.production-hero-slider-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.production-hero-slider-desc {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Hero секция */
+.production-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Анимация для фона */
+.production-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0e4a7b; /* temporary non-black bg to avoid flash */
+  background-image: linear-gradient(135deg, rgba(14,74,123,0.5), rgba(14,74,123,0.3));
+}
+
+.production-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.production-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(14,74,123,0.35) 0%, rgba(0,0,0,0.25) 100%);
+  z-index: 2;
+  opacity: 1; /* visible from start to mask any flash */
+  transition: opacity 0.2s ease;
+}
+
+/* keep visible; no change on loaded */
+.production-hero-bg-video.loaded ~ .production-hero-overlay {
+  opacity: 1;
+}
+
+.production-hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+  width: 100%;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* Показываем контент когда видео загружено */
+.production-hero-bg-video.loaded ~ .production-hero-content {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+/* remove temp bg when video is loaded */
+.production-hero-bg-video.loaded ~ .production-hero-content,
+.production-hero-bg-video.loaded ~ .production-hero-overlay {
+  /* keep overlay/content visible, nothing to change */
+}
+
+.production-hero-bg-video.loaded {
+  /* as soon as loaded, underlying video fades in (handled in component), the bg can stay but is covered */
+}
+
+.back-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-5px);
+}
+
+.production-hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.production-hero-content p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Основной контент */
+.production-main {
+  background: #f8fafc;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Особенности производства */
+.production-features {
+  padding: 80px 0;
+  background: white;
+}
+
+.production-features h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e1e8f0;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(14,74,123,0.15);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0e4a7b;
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Видео галерея */
+.production-videos {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.production-videos h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+/* Управление отображением блоков деталей в зависимости от устройства */
+@media (max-width: 899px) {
+  /* На мобильном показываем только инлайн-блок под карточкой */
+  .production-videos .container > .production-video-details-wide { display: none !important; }
+  .videos-grid .production-video-details-wide { display: block; }
+}
+
+/* На десктопе прячем инлайн и показываем глобальный блок на всю ширину */
+@media (min-width: 900px) {
+  .videos-grid .production-video-details-wide { display: none !important; }
+  .production-videos .container > .production-video-details-wide { display: block; }
+}
+
+.video-item {
+  display: flex;
+}
+
+.video-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 360px;
+  width: 100%;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(14,74,123,0.15);
+}
+
+.production-video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.video-info {
+  padding: 12px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+}
+
+.video-info h3 {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #0e4a7b;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.video-info p {
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Кнопка Подробнее */
+.production-video-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(14,74,123,0.10);
+  width: 100%;
+}
+
+.production-video-btn:hover {
+  background: #0e4a7b;
+  box-shadow: 0 4px 16px 0 rgba(14,74,123,0.18);
+}
+
+/* Расширенное окно для видео */
+.production-video-details-wide {
+  grid-column: 1 / -1;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 40px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: linear-gradient(120deg, #eaf6ff 0%, #fff 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.15);
+  padding: 32px 28px;
+  color: #2a4666;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  animation: fadeInVideoDetails 0.5s cubic-bezier(.23,1.01,.32,1);
+  overflow: hidden;
+}
+
+.production-video-details-video {
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.production-video-expanded {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(14,74,123,0.15);
+}
+
+.production-video-details-text {
+  width: 100%;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.production-video-details-text h4 {
+  margin: 0 0 16px 0;
+  font-size: 1.4rem;
+  color: #0e4a7b;
+  font-weight: 700;
+}
+
+.production-video-details-text p {
+  margin: 0;
+  color: #2a4666;
+  line-height: 1.7;
+}
+
+.production-video-details-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.production-video-details-actions .production-video-btn {
+  width: auto;
+  min-width: 120px;
+}
+
+/* Анимация появления расширенного окна */
+@keyframes fadeInVideoDetails {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Фото галерея */
+.production-gallery {
+  padding: 80px 0;
+  background: white;
+}
+
+.production-gallery h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(14,74,123,0.9));
+  color: white;
+  padding: 30px 20px 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.gallery-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+
+
+/* Hero секция с анимацией загрузки */
+.production-hero-wrapper {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.production-hero-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.production-hero-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Анимация выезда видео при загрузке */
+.production-hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.production-hero-bg-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Отключаем любые анимации и переходы в hero на странице Производство */
+.production-hero-wrapper,
+.production-hero-section,
+.production-hero-bg,
+.production-hero-bg-video,
+.production-hero-bg-video video,
+.production-hero-overlay,
+.production-hero-content {
+  animation: none !important;
+  transition: none !important;
+} 
+
+/* Полное отключение анимаций/переходов в Production Hero */
+.production-hero-wrapper, .production-hero-wrapper *:not(.allow-fade) {
+  animation: none !important;
+  transition: none !important;
+} 

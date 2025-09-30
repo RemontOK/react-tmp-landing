@@ -1,0 +1,135 @@
+/* Performance optimizations */
+
+/* Hardware acceleration for animations */
+.animate-transform {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimize paint and layout */
+.optimize-render {
+  contain: layout style paint;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize images */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize for mobile performance */
+@media (max-width: 768px) {
+  .mobile-optimize {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+/* Loading states */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Optimize video elements */
+video {
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Optimize for high DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimize {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #1565c0;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Optimize for print */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Optimize for dark mode */
+@media (prefers-color-scheme: dark) {
+  .dark-mode-optimize {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+/* Optimize for low bandwidth */
+@media (max-width: 480px) {
+  .low-bandwidth {
+    background-image: none !important;
+  }
+
+}
+
+/* Optimize for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .touch-optimize {
+    min-height: 44px;
+    min-width: 44px;
+  }
+} 

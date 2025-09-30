@@ -1,40 +1,290 @@
+@media (min-width: 901px) {
+
+  /* футер */
 .tmp-stern {
   width: 100vw;
-  height: 80px;
+  min-height: 340px;
+  background: #ffffff;
   position: relative;
-  margin-top: 120px;
   z-index: 900;
+  margin-top: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
+/*фон футера*/
 .tmp-stern-bg {
   width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, #1565c0 60%, #42a5f5 100%);
-  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  min-height: 340px;
+  background:
+    linear-gradient(180deg, rgba(10,32,64,0.82) 0%, rgba(21,101,192,0.82) 100%),
+    url('./assets/stern_bg.webp') center/cover no-repeat,
+    url('data:image/svg+xml;utf8,<svg width="60" height="60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="60" height="60" fill="none" stroke="%23eaf6ff" stroke-width="0.5"/><path d="M0 60 Q 30 30 60 60" stroke="%23eaf6ff" stroke-width="1" fill="none" opacity="0.13"/></svg>');
+  background-blend-mode: overlay, normal, normal;
+  background-size: cover, cover, 60px 60px;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-position: center, center, top left;
   position: relative;
   box-shadow: 0 4px 24px 0 rgba(21,101,192,0.10);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  padding-bottom: 0;
+  overflow: hidden;
+  border: none;
 }
 
+/* волна внизу футера */
+.tmp-stern-bg::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 64px;
+  background: url('data:image/svg+xml;utf8,<svg width="1920" height="64" viewBox="0 0 1920 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 32C320 64 640 0 960 32C1280 64 1600 0 1920 32V64H0V32Z" fill="%23eaf6ff" fill-opacity="0.13"/></svg>') center bottom/cover no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* контент футера */
+.stern-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 36px 32px 18px 32px;
+  gap: 32px;
+  position: relative;
+}
+
+/* блок с логотипом */
+.tmp-stern-logo-block {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 12vw;
+  max-width: 30vw;
+  margin-right: 32px;
+  position: static;
+}
 .tmp-stern-logo {
-  height: 56px;
-  margin: 0 48px 12px 0;
-  filter: drop-shadow(0 2px 8px rgba(21,101,192,0.2));
-  background: white;
-  border-radius: 50%;
-  padding: 8px;
+  display: none;
+}
+.tmp-stern-logo-desktop {
+  display: block;
+  height: 15vw;
+  width: auto;
+  max-width: 30vw;
+  object-fit: contain;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  opacity: 0.97;
+  filter: drop-shadow(0 4px 24px rgba(14,74,123,0.10));
+}
+/* колонки с информацией */
+.stern-info-columns {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+  align-items: flex-start;
+  padding-top: 6px;
+}
+.stern-location, .stern-extra {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 180px;
 }
 
-@media (max-width: 600px) {
-  .tmp-stern {
-    height: 48px;
-    margin-top: 80px;
-  }
-  .tmp-stern-logo {
-    height: 32px;
-    margin: 0 16px 6px 0;
-    padding: 4px;
-  }
+/* Контакты */
+.stern-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  color: #eaf6ff;
+  font-size: 1.08rem;
+}
+.stern-contacts-title {
+  font-weight: 700;
+  font-size: 1.13rem;
+  margin-bottom: 6px;
+  color: #fff;
+  letter-spacing: 0.03em;
+  text-align: center;
+  width: 100%;
+}
+.stern-contacts-text {
+  width: 100%;
+  margin-top: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.stern-contacts-text-item {
+  background: rgba(221, 221, 221, 0.4);
+  width: 100%;
+  border-radius: 10px;
+  padding: 1vw 1vw 1vw 1vw;
+  margin-bottom: 1vw;
+  color: #eaf6ff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+  border: none;
+  cursor: pointer;
+}
+
+.stern-contacts-text-item:hover {
+  background: #1565c0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+}
+
+/* иконки под контактами */
+.stern-link-info {
+  color: #eaf6ff;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 600;
+}
+
+.stern-link-info:hover {
+  color: #fff;
+}
+
+.stern-link-info.phone {
+  font-weight: 800;
+  font-size: 1.2em;
+}
+
+.stern-link-info.email {
+  font-weight: 800;
+  cursor: pointer;
+}
+.stern-link {
+  color: #eaf6ff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.stern-link:hover {
+  background: #1565c0;
+  color: #fff;
+  text-decoration: underline;
+}
+.stern-social {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 28px;
+  padding-left: 0;
+  margin-top: 8px;
+  width: 100%;
+}
+.stern-social a {
+  color: #eaf6ff;
+  font-size: 1.5rem;
+  transition: color 0.2s, transform 0.2s;
+}
+.stern-social a:hover {
+  color: #fff;
+  transform: scale(1.12);
+}
+/* карта */
+.stern-location {
+  margin-top: 0;
+  min-width: 220px;
+  color: #eaf6ff;
+  font-size: 1.08rem;
+  gap: 10px;
+}
+.stern-location-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.13rem;
+  margin-bottom: 6px;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+.stern-location-text {
+  text-align: center;
+}
+.stern-map-placeholder {
+  width: 28vw;
+  height: 12vw;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eaf6ff;
+  font-size: 0.98rem;
+  font-style: italic;
+  margin-top: 6px;
+  border: 1.5px dashed #eaf6ff;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes oilSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* дополнительная информация */
+.stern-extra {
+  display: none;
+}
+.stern-extra-desktop-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stern-extra-desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:65vw;
+  font-size: 1.05rem;
+  color: #eaf6ff;
+  background: rgba(21,101,192,0.92);
+  border-radius: 10px;
+  padding: 10px 18px 10px 18px;
+  box-shadow: 0 2px 8px 0 rgba(14,74,123,0.08);
+  margin-top: 18px;
+}
+.stern-copyright {
+  color: #eaf6ff;
+  font-size: 0.98rem;
+  margin: 18px 0 0 0;
+  text-align: center;
+  opacity: 0.7;
+}
+.stern-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
 }

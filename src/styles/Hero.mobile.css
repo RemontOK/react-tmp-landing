@@ -1,0 +1,31 @@
+/* Мобильные стили для Hero (до 900px включительно) */
+
+@media (max-width: 900px) {
+  .hero-slider-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .hero-slider-desc {
+    font-size: 1rem;
+    max-width: 95vw;
+  }
+  .hero-slider-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+  }
+  .hero-slider-btn.left {
+    left: 8px;
+  }
+  .hero-slider-btn.right {
+    right: 8px;
+  }
+  .hero-slider-dots {
+    bottom: 18px;
+    gap: 8px;
+  }
+  .hero-slider-dots .dot {
+    width: 10px;
+    height: 10px;
+  }
+} 

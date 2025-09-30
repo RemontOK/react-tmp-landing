@@ -1,0 +1,383 @@
+@media (max-width: 900px) {
+  @keyframes aboutFadeIn {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .about-container, .about-feature, .about-value, .about-img-frame, .about-media-block {
+    animation: aboutFadeIn 0.3s ease-out both;
+  }
+  .about-feature { animation-delay: 0.1s; }
+  .about-value { animation-delay: 0.2s; }
+  .about-img-frame { animation-delay: 0.15s; }
+  .about-media-block { animation-delay: 0.25s; }
+
+  .about-section {
+  padding: 18px 0 8px 0;
+  background:  linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%),
+  url('data:image/svg+xml;utf8,<svg width="60" height="60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="60" height="60" fill="none" stroke="%23b3d6f2" stroke-width="0.5"/><path d="M0 60 Q 30 30 60 60" stroke="%23b3d6f2" stroke-width="1" fill="none" opacity="0.18"/></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #18324b;
+  position: relative;
+}
+  .about-section::after {
+    display: none;
+  }
+  .about-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 2vw;
+    background: linear-gradient(120deg, rgba(14,74,123,0.10) 0%, rgba(66,165,245,0.10) 100%);
+    border-radius: 10px;
+    box-shadow: 0 8px 40px 0 rgba(14,74,123,0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(2px);
+  }
+  .about-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2vw;
+    color: #0e4a7b;
+  }
+
+   .about-btn, .about-btn-solid {
+    width: 70%;
+    font-size: 0.98rem;
+    padding: 10px 0;
+    margin: 12px 0 8px 0;
+    border-radius: 6px;
+  }
+
+  .about-features {
+    display: flex;
+
+    align-items: center;
+    gap: 24px;
+
+    justify-content: center;
+    width: 100%;
+
+    flex-direction: column;
+  }
+  
+  .about-feature {
+    display: flex;
+
+    gap: 20px;
+    background: linear-gradient(120deg, rgba(14,74,123,0.08) 0%, rgba(66,165,245,0.08) 100%);
+    border-radius: 16px;
+    padding: 20px;
+
+
+    flex: 0 0 300px;
+    box-shadow: 0 2px 12px 0 rgba(14,74,123,0.08);
+    border: 2px solid #eaf6ff;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  
+  .about-feature {
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    min-height: 10px;
+    flex: none;
+  }
+  
+  .about-icon {
+    font-size: 1.8rem;
+    color: #1565c0;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+  
+  .about-feature-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0e4a7b;
+    text-align: left;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  
+  .about-feature-desc {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #3a4a5a;
+    margin-top: 8px;
+    text-align: left;
+    line-height: 1.4;
+  }
+
+  .about-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    margin-bottom: 1vw;
+    align-items: center;
+  }
+  .about-img-frame {
+    width: 95vw;
+    height: 40vw;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    box-shadow: none;
+    border-width: 1px;
+  }
+   .about-img-frame img {
+    border-radius: 2vw;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+    .about-img-frame:hover {
+    box-shadow: 0 8px 32px 0 rgba(14,74,123,0.18);
+    border-color: #7ec6f7;
+  }
+  
+  /* Стили для кнопок на мобильных */
+  .about-img-frame.clickable {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .about-img-frame.clickable:focus {
+    outline: 2px solid #1565c0;
+    outline-offset: 2px;
+  }
+  
+  .about-img-frame.clickable:active {
+    transform: scale(0.98);
+  }
+  
+  .about-img-frame.clickable:hover {
+    overflow: hidden;
+  }
+  
+  /* Стили для блока проектов на мобильных */
+  .projects-block {
+    background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+    border-color: #1565c0;
+  }
+  
+  .projects-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    gap: 6px;
+    position: relative;
+    z-index: 2;
+    height: 100%;
+  }
+  
+  .projects-placeholder svg {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .about-img-caption {
+    background: rgba(14,74,123,0.92);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 1vw 2vw;
+    border-radius: 0 0 2vw 2vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    letter-spacing: 0.02em;
+    z-index: 4;
+  }
+  
+  /* Эффект увеличения изображения на мобильных */
+  .about-img-frame.clickable:hover img,
+  .about-img-frame.clickable:active img {
+    transform: scale(1.06);
+    transition: all 0.6s ease;
+  }
+  .about-lead {
+    font-size: 0.85rem;
+    color: #18324b;
+    margin-bottom: 5vw;
+    text-align: center;
+    font-weight: 500;
+    max-width: 700px;
+  }
+
+
+
+  .about-media-block {
+    width: 99vw;
+    margin: 5vw 0 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+.about-gallery-scroll {
+  width: 100vw;
+  overflow-x: auto;
+  box-sizing: border-box;
+  padding: 0 0 12px 0;
+  -webkit-overflow-scrolling: touch;
+}
+.about-gallery-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  min-width: max-content;
+  padding: 2vw;
+}
+.about-gallery-scroll::-webkit-scrollbar {
+  height: 1vw;
+  background: transparent;
+}
+.about-gallery-scroll::-webkit-scrollbar-thumb {
+  background: #b3d6f2;
+  border-radius: 4px;
+}
+
+.about-gallery-track img {
+  height: 140px;
+  width: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px 0 rgba(14,74,123,0.10);
+  border: 2px solid #eaf6ff;
+  background: #eaf6ff;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.about-gallery-track img:hover {
+  box-shadow: 0 8px 32px 0 rgba(14,74,123,0.18);
+  border-color: #7ec6f7;
+}
+.about-video {
+  width: 100%;
+  max-width: 1100px;
+  max-height: 500px;
+  min-height: 120px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px 0 rgba(14,74,123,0.13);
+  margin: 0 auto;
+  display: block;
+  background: #000;
+}
+
+  .about-values-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+  }
+  .about-values-block h3 {
+    font-size: 1.2rem;
+    color: #0e4a7b;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-align: center;
+    padding: 0 16px;
+  }
+  .about-values-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+    padding: 0 16px;
+  }
+  .about-value {
+    background: rgba(255,255,255,0.92);
+    border: 2px solid #eaf6ff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px 0 rgba(14,74,123,0.06);
+    padding: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .about-value:hover {
+    box-shadow: 0 6px 24px 0 rgba(14,74,123,0.13);
+    border-color: #7ec6f7;
+  }
+  .about-value-icon {
+    font-size: 1.6rem;
+    color: #1565c0;
+    margin-bottom: 4px;
+  }
+  .about-value-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0e4a7b;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .about-value-desc {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #3a4a5a;
+    line-height: 1.4;
+  }
+  .about-btn-solid {
+    background: #0e4a7b;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px 0 rgba(14,74,123,0.08);
+    transition: background 0.2s;
+    width: 80%;
+    max-width: 300px;
+  }
+  .about-btn-solid:hover {
+    background: #1565c0;
+  }
+    .about-title {
+      font-size: 2.2rem;
+      max-width: 700px;
+    }
+    .about-desc {
+      font-size: 1.1rem;
+      max-width: 600px;
+    }
+
+
+    .about-gallery-track img {
+      max-width: 160px;
+      max-height: 90px;
+      border-radius: 8px;
+    }
+    .about-video {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 12px;
+    }
+  }
+
+  /* Дополнительные стили для очень маленьких экранов */
+ 

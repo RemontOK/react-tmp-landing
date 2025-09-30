@@ -1,0 +1,488 @@
+/* === СТРАНИЦА PCB И СЕРВИС === */
+
+/* Hero секция */
+.pcb-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pcb-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.pcb-hero-bg img,
+.pcb-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pcb-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+  z-index: 2;
+}
+
+.pcb-hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.back-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-5px);
+}
+
+.pcb-hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.pcb-hero-content p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Основной контент */
+.pcb-main {
+  background: #f8fafc;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Услуги PCB */
+.pcb-services {
+  padding: 80px 0;
+  background: white;
+}
+
+.pcb-services h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e1e8f0;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(14,74,123,0.15);
+}
+
+.service-icon {
+  font-size: 3rem;
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0e4a7b;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Процесс ремонта */
+.repair-process {
+  padding: 44px 0; /* was 60px */
+  background: #f8fafc;
+}
+
+.repair-process h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.process-card {
+  background: white;
+  padding: 40px 20px 22px; /* tighter */
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e1e8f0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px; /* was 280px */
+}
+
+.process-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(14,74,123,0.15);
+}
+
+.process-step {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1565c0;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 16px rgba(21,101,192,0.3);
+}
+
+.process-card h3 {
+  font-size: 1.25rem; /* slightly smaller */
+  font-weight: 600;
+  color: #0e4a7b;
+  margin: 12px 0 8px 0;
+}
+
+.process-card p {
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 240px;
+}
+
+/* Видео галерея */
+.pcb-videos {
+  padding: 80px 0;
+  background: white;
+}
+
+.pcb-videos h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  justify-items: stretch;
+}
+
+/* Управление отображением блоков деталей в зависимости от устройства */
+@media (max-width: 899px) {
+  /* На мобильном показываем только инлайн-блок под карточкой */
+  .pcb-videos .container > .pcb-video-details-wide { display: none !important; }
+  .videos-grid .pcb-video-details-wide { display: block; }
+}
+
+/* На десктопе — наоборот */
+@media (min-width: 900px) {
+  .videos-grid .pcb-video-details-wide { display: none !important; }
+  .pcb-videos .container > .pcb-video-details-wide { display: block; }
+}
+
+.video-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.1);
+  transition: all 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(14,74,123,0.15);
+}
+
+.pcb-video {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.video-info {
+  padding: 25px;
+}
+
+.video-info h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0e4a7b;
+  margin-bottom: 10px;
+}
+
+.video-info p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Преимущества */
+.pcb-advantages {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.pcb-advantages h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.advantage-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e1e8f0;
+}
+
+.advantage-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(14,74,123,0.15);
+}
+
+.advantage-icon {
+  font-size: 3rem;
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+
+.advantage-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0e4a7b;
+  margin-bottom: 15px;
+}
+
+.advantage-card p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Фото галерея */
+.pcb-gallery {
+  padding: 80px 0;
+  background: white;
+}
+
+.pcb-gallery h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4a7b;
+  margin-bottom: 60px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(14,74,123,0.9));
+  color: white;
+  padding: 30px 20px 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.gallery-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+
+.gallery-overlay p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Расширенное окно для видео на PCB */
+.pcb-video-details-wide {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 40px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: linear-gradient(120deg, #eaf6ff 0%, #fff 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(14,74,123,0.15);
+  padding: 32px 28px;
+  color: #2a4666;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  overflow: hidden;
+}
+
+.pcb-video-details-video {
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pcb-video-expanded {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(14,74,123,0.15);
+}
+
+.pcb-video-details-text {
+  width: 100%;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.pcb-video-details-text h4 {
+  margin: 0 0 16px 0;
+  font-size: 1.4rem;
+  color: #0e4a7b;
+  font-weight: 700;
+}
+
+.pcb-video-details-text p {
+  margin: 0;
+  color: #2a4666;
+  line-height: 1.7;
+}
+
+.pcb-video-details-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.pcb-video-details-actions .production-video-btn {
+  width: auto;
+  min-width: 120px;
+}
+
+
+
+/* Полное отключение анимаций/переходов в PCB Hero */
+.pcb-hero, .pcb-hero * {
+  animation: none !important;
+  transition: none !important;
+} 

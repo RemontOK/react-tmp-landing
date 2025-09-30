@@ -1,0 +1,7 @@
+/* Мобильные стили для App (до 900px включительно) */
+ 
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+} 

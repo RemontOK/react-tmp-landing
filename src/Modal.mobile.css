@@ -1,0 +1,87 @@
+@media (max-width: 900px) {
+  .modal {
+    width: 92vw;
+    min-width: 0;
+    max-width: 92vw;
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+  .modal h2 { font-size: 1.35rem; margin-bottom: 14px; }
+  .modal input, .modal textarea { padding: 10px 12px; }
+  .modal-submit { padding: 12px 0; font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    min-width: auto;
+    width: 95vw;
+    padding: 24px 20px;
+    margin: 20px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-header p {
+    font-size: 0.9rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .modal input, .modal textarea, .modal select {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+  
+  .modal-submit {
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+  
+  .submit-status {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .modal-tabs {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .modal-tab {
+    padding: 7px 12px;
+    font-size: 0.95rem;
+  }
+  .contact-links {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .contact-item {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  .contact-item::before {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    flex-basis: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 20px 16px;
+    margin: 10px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .contact-form {
+    gap: 16px;
+  }
+} 

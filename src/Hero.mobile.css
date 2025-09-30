@@ -1,0 +1,67 @@
+/* Мобильные стили для Hero (до 900px включительно) */
+
+@media (max-width: 900px) {
+  .hero-slider-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .hero-slider-desc {
+    font-size: 1rem;
+    max-width: 95vw;
+  }
+  .hero-slider-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+  }
+  .hero-slider-btn.left { left: 8px; }
+  .hero-slider-btn.right { right: 8px; }
+  .hero-slider-dots { bottom: 18px; gap: 8px; }
+  .hero-slider-dots .dot { width: 10px; height: 10px; }
+}
+@media (max-width: 700px) {
+  .about-container {
+    padding: 0 2vw;
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 600px) {
+  .hero-title-large {
+    font-size: 2.2rem;
+  }
+  .hero-subtitle-large {
+    font-size: 1.1rem;
+  }
+  .hero-scroll-btn-bottom {
+    bottom: 12px;
+  }
+  .intro-logo {
+    max-width: 80vw;
+    width: 140px;
+  }
+  .intro-text-block {
+    max-width: 98vw;
+    padding: 8px 4vw 14px 4vw;
+    font-size: 0.98rem;
+  }
+  .intro-title {
+    font-size: 1.1rem;
+  }
+  .intro-subtitle {
+    font-size: 0.95rem;
+  }
+  .intro-desc {
+    font-size: 0.85rem;
+  }
+  .hero-intro-content-wrapper {
+    padding-top: 10vh;
+  }
+  .ship-draggable, .ship-track-bg {
+    width: 220px !important;
+    min-width: 180px;
+  }
+  .ship-icon {
+    width: 38px !important;
+    height: 38px !important;
+  }
+} 

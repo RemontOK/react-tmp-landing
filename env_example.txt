@@ -1,0 +1,10 @@
+# Скопируйте этот файл в .env и используйте для настройки SMTP
+
+# Настройки SMTP сервера Timeweb
+SMTP_HOST=smtp.timeweb.ru
+SMTP_PORT=465
+SMTP_USER=EKB@техмепром.рф
+SMTP_PASS=j1chs2aEA
+
+# Порт сервера (опционально)
+PORT=5174 

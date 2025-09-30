@@ -1,42 +1,43 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import './Hero.css';
-import heroBg from './assets/hero_bg.png';
+import heroVideo from './assets/optimized/TMP_hero_optimized.mp4';
+import heroVideoMobile from './assets/optimized/TMP_hero_mobile.mp4';
 
 const Hero = () => {
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const scrollY = window.scrollY;
-        heroRef.current.style.backgroundPosition = `center ${scrollY * 0.4}px`;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <header ref={heroRef} className="hero" style={{ backgroundImage: `url(${heroBg})` }}>
-      <nav className="hero-nav">
-        <div className="hero-logo-block">
-          <div className="hero-logo">ТМП</div>
-          <div className="hero-logo-sub">ТЕХМЕТПРОМ</div>
-        </div>
-        <ul className="hero-menu">
-          <li><a href="#about">О компании</a></li>
-          <li><a href="#services">Услуги</a></li>
-          <li><a href="#projects">Проекты</a></li>
-        </ul>
-        <button className="hero-btn">Оставить заявку</button>
-      </nav>
-      <div className="hero-content">
-        {/* ...existing content... */}
+    <section className="hero">
+      {/* === Основной контент (видео) - всегда виден === */}
+      <div className="hero-main-anim">
+        {/* Fallback изображение - всегда видно */}
+     
+        
+        {/* Видео поверх fallback */}
+        <video
+          className="hero-bg-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onLoadedData={(e) => e.currentTarget.classList.add('loaded')}
+        >
+          <source src={heroVideoMobile} type="video/mp4" media="(max-width: 768px)" />
+          <source src={heroVideo} type="video/mp4" media="(min-width: 769px)" />
+        </video>
+        
+        {/* Затемнение поверх видео */}
+        <div className="hero-overlay" />
+        
+        {/* Контент поверх видео */}
+
+        <button className="hero-scroll-btn hero-scroll-btn-bottom" onClick={() => {
+          const about = document.getElementById('about');
+          if (about) about.scrollIntoView({ behavior: 'smooth' });
+        }}>
+          <span className="arrow-down"></span>
+        </button>
       </div>
-      <div className="hero-more-wrapper">
-        <button className="hero-more">Подробнее о нас →</button>
-      </div>
-    </header>
+    </section>
   );
 };
 
