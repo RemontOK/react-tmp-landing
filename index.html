@@ -71,6 +71,32 @@
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#1565c0" />
     
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(105497016, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+       
+       // Проверка загрузки счетчика (для отладки)
+       setTimeout(function() {
+         if (typeof ym !== 'undefined' && typeof window.ym === 'function') {
+           console.log('✅ Яндекс.Метрика загружена успешно');
+         } else {
+           console.warn('⚠️ Яндекс.Метрика не загрузилась');
+         }
+       }, 2000);
+    </script>
+    <!-- /Yandex.Metrika counter -->
+    
     <!-- Prevent gray background on load -->
     <style>
       html, body, #root {
@@ -146,6 +172,7 @@
         });
       })();
     </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105497016" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <div class="page-mask" id="page-mask"></div>
     <div id="root"></div>
     <script>
@@ -183,17 +210,5 @@
         }
       }(window.location))
     </script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-      (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105497016', 'ym');
-      ym(105497016, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/105497016" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
   </body>
 </html>
