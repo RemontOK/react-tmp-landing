@@ -112,7 +112,7 @@
       }
 
     </style>
-    <script type="module" crossorigin src="/assets/index-Em5faYZT.js"></script>
+    <script type="module" crossorigin src="/assets/index-CTE5gWTG.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-Bw1QlF7F.css">
   </head>
   <body>
@@ -128,8 +128,14 @@
           if (message.includes('metrika') || 
               message.includes('err_blocked_by_client') ||
               message.includes('yandex.ru') ||
+              message.includes('mc.yandex.ru') ||
+              message.includes('tag_turbo') ||
+              message.includes('tag.js') ||
               message.includes('third-party cookie') ||
-              message.includes('react devtools')) {
+              message.includes('react devtools') ||
+              message.includes('content-security-policy') ||
+              message.includes('prefetch-src') ||
+              message.includes('container_is_hidden')) {
             return; // Suppress these errors
           }
           originalError.apply(console, args);
@@ -140,8 +146,15 @@
           if (message.includes('metrika') || 
               message.includes('err_blocked_by_client') ||
               message.includes('yandex.ru') ||
+              message.includes('mc.yandex.ru') ||
+              message.includes('tag_turbo') ||
+              message.includes('tag.js') ||
               message.includes('third-party cookie') ||
-              message.includes('react devtools')) {
+              message.includes('react devtools') ||
+              message.includes('content-security-policy') ||
+              message.includes('prefetch-src') ||
+              message.includes('container_is_hidden') ||
+              message.includes('unrecognized content-security-policy')) {
             return; // Suppress these warnings
           }
           originalWarn.apply(console, args);
@@ -154,9 +167,15 @@
           if (filename.includes('metrika') || 
               filename.includes('yandex.ru') ||
               filename.includes('mc.yandex.ru') ||
+              filename.includes('yastatic.net') ||
+              filename.includes('tag_turbo') ||
+              filename.includes('tag.js') ||
               message.includes('metrika') ||
               message.includes('err_blocked_by_client') ||
-              message.includes('tag_turbo')) {
+              message.includes('tag_turbo') ||
+              message.includes('container_is_hidden') ||
+              message.includes('content-security-policy') ||
+              message.includes('prefetch-src')) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -182,7 +201,12 @@
         // Suppress unhandled promise rejections for blocked resources
         window.addEventListener('unhandledrejection', function(e) {
           const reason = String(e.reason || '').toLowerCase();
-          if (reason.includes('metrika') || reason.includes('yandex')) {
+          if (reason.includes('metrika') || 
+              reason.includes('yandex') ||
+              reason.includes('mc.yandex.ru') ||
+              reason.includes('tag_turbo') ||
+              reason.includes('container_is_hidden') ||
+              reason.includes('blocked')) {
             e.preventDefault();
             return false;
           }
