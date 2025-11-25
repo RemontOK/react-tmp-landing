@@ -74,54 +74,62 @@
     <!-- Suppress errors from blocked scripts (MUST be before any other scripts!) -->
     <script>
       (function() {
+        'use strict';
+        
         // Suppress console errors for blocked resources
         const originalError = console.error;
         const originalWarn = console.warn;
         const originalLog = console.log;
+        const originalInfo = console.info;
+        
+        // Helper function to check if message should be suppressed
+        function shouldSuppress(message) {
+          const msg = String(message).toLowerCase();
+          return msg.includes('metrika') || 
+                 msg.includes('err_blocked_by_client') ||
+                 msg.includes('yandex.ru') ||
+                 msg.includes('mc.yandex.ru') ||
+                 msg.includes('yastatic.net') ||
+                 msg.includes('tag_turbo') ||
+                 msg.includes('tag.js') ||
+                 msg.includes('context.js') ||
+                 msg.includes('third-party cookie') ||
+                 msg.includes('react devtools') ||
+                 msg.includes('content-security-policy') ||
+                 msg.includes('prefetch-src') ||
+                 msg.includes('container_is_hidden') ||
+                 msg.includes('unrecognized') ||
+                 msg.includes('_oncheckconfirm') ||
+                 msg.includes('failed to load resource');
+        }
         
         console.error = function(...args) {
-          const message = args.join(' ').toLowerCase();
-          if (message.includes('metrika') || 
-              message.includes('err_blocked_by_client') ||
-              message.includes('yandex.ru') ||
-              message.includes('mc.yandex.ru') ||
-              message.includes('yastatic.net') ||
-              message.includes('tag_turbo') ||
-              message.includes('tag.js') ||
-              message.includes('third-party cookie') ||
-              message.includes('react devtools') ||
-              message.includes('content-security-policy') ||
-              message.includes('prefetch-src') ||
-              message.includes('container_is_hidden') ||
-              message.includes('unrecognized')) {
+          const message = args.join(' ');
+          if (shouldSuppress(message)) {
             return; // Suppress these errors
           }
           originalError.apply(console, args);
         };
         
         console.warn = function(...args) {
-          const message = args.join(' ').toLowerCase();
-          if (message.includes('metrika') || 
-              message.includes('err_blocked_by_client') ||
-              message.includes('yandex.ru') ||
-              message.includes('mc.yandex.ru') ||
-              message.includes('yastatic.net') ||
-              message.includes('tag_turbo') ||
-              message.includes('tag.js') ||
-              message.includes('third-party cookie') ||
-              message.includes('react devtools') ||
-              message.includes('content-security-policy') ||
-              message.includes('prefetch-src') ||
-              message.includes('container_is_hidden') ||
-              message.includes('unrecognized')) {
+          const message = args.join(' ');
+          if (shouldSuppress(message)) {
             return; // Suppress these warnings
           }
           originalWarn.apply(console, args);
         };
         
-        // Suppress network errors (must be set early)
+        console.info = function(...args) {
+          const message = args.join(' ');
+          if (shouldSuppress(message)) {
+            return; // Suppress these info messages
+          }
+          originalInfo.apply(console, args);
+        };
+        
+        // Suppress network errors (must be set early, capture phase)
         window.addEventListener('error', function(e) {
-          const filename = (e.filename || '').toLowerCase();
+          const filename = (e.filename || e.target?.src || '').toLowerCase();
           const message = (e.message || '').toLowerCase();
           if (filename.includes('metrika') || 
               filename.includes('yandex.ru') ||
@@ -135,7 +143,8 @@
               message.includes('tag_turbo') ||
               message.includes('container_is_hidden') ||
               message.includes('content-security-policy') ||
-              message.includes('prefetch-src')) {
+              message.includes('prefetch-src') ||
+              message.includes('failed to load')) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -143,19 +152,57 @@
           }
         }, true);
         
+        // Suppress resource loading errors
+        window.addEventListener('error', function(e) {
+          if (e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK' || e.target.tagName === 'IMG')) {
+            const src = (e.target.src || e.target.href || '').toLowerCase();
+            if (src.includes('metrika') || 
+                src.includes('yandex.ru') ||
+                src.includes('mc.yandex.ru') ||
+                src.includes('yastatic.net') ||
+                src.includes('tag_turbo') ||
+                src.includes('context.js')) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+          }
+        }, true);
+        
         // Suppress unhandled promise rejections
         window.addEventListener('unhandledrejection', function(e) {
-          const reason = String(e.reason || '').toLowerCase();
+          const reason = String(e.reason || e.reason?.message || '').toLowerCase();
           if (reason.includes('metrika') || 
               reason.includes('yandex') ||
               reason.includes('mc.yandex.ru') ||
               reason.includes('tag_turbo') ||
               reason.includes('container_is_hidden') ||
-              reason.includes('blocked')) {
+              reason.includes('blocked') ||
+              reason.includes('err_blocked_by_client')) {
             e.preventDefault();
             return false;
           }
         });
+        
+        // Override fetch to suppress blocked resource errors
+        if (window.fetch) {
+          const originalFetch = window.fetch;
+          window.fetch = function(...args) {
+            return originalFetch.apply(this, args).catch(function(error) {
+              const url = (args[0] || '').toString().toLowerCase();
+              const errorMsg = (error.message || '').toLowerCase();
+              if (url.includes('mc.yandex.ru') || 
+                  url.includes('yandex.ru/ads') ||
+                  url.includes('yastatic.net') ||
+                  errorMsg.includes('blocked') ||
+                  errorMsg.includes('err_blocked_by_client')) {
+                // Suppress blocked resource errors silently
+                return Promise.reject(new Error('Resource blocked'));
+              }
+              return Promise.reject(error);
+            });
+          };
+        }
       })();
     </script>
     
