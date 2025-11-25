@@ -112,8 +112,8 @@
       }
 
     </style>
-    <script type="module" crossorigin src="/assets/index-zp8dwCau.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CnVUsidd.css">
+    <script type="module" crossorigin src="/assets/index-Em5faYZT.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bw1QlF7F.css">
   </head>
   <body>
     <script>
@@ -153,14 +153,31 @@
           const message = (e.message || '').toLowerCase();
           if (filename.includes('metrika') || 
               filename.includes('yandex.ru') ||
+              filename.includes('mc.yandex.ru') ||
               message.includes('metrika') ||
-              message.includes('err_blocked_by_client')) {
+              message.includes('err_blocked_by_client') ||
+              message.includes('tag_turbo')) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
             return false;
           }
         }, true);
+        
+        // Suppress network fetch errors for blocked resources
+        const originalFetch = window.fetch;
+        window.fetch = function(...args) {
+          return originalFetch.apply(this, args).catch(function(error) {
+            const url = (args[0] || '').toString().toLowerCase();
+            if (url.includes('mc.yandex.ru') || 
+                url.includes('yandex.ru/ads') ||
+                error.message && error.message.includes('blocked')) {
+              // Suppress blocked resource errors
+              return Promise.reject(new Error('Resource blocked by client'));
+            }
+            return Promise.reject(error);
+          });
+        };
         
         // Suppress unhandled promise rejections for blocked resources
         window.addEventListener('unhandledrejection', function(e) {
