@@ -71,6 +71,94 @@
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#1565c0" />
     
+    <!-- Suppress errors from blocked scripts (MUST be before any other scripts!) -->
+    <script>
+      (function() {
+        // Suppress console errors for blocked resources
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const originalLog = console.log;
+        
+        console.error = function(...args) {
+          const message = args.join(' ').toLowerCase();
+          if (message.includes('metrika') || 
+              message.includes('err_blocked_by_client') ||
+              message.includes('yandex.ru') ||
+              message.includes('mc.yandex.ru') ||
+              message.includes('yastatic.net') ||
+              message.includes('tag_turbo') ||
+              message.includes('tag.js') ||
+              message.includes('third-party cookie') ||
+              message.includes('react devtools') ||
+              message.includes('content-security-policy') ||
+              message.includes('prefetch-src') ||
+              message.includes('container_is_hidden') ||
+              message.includes('unrecognized')) {
+            return; // Suppress these errors
+          }
+          originalError.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+          const message = args.join(' ').toLowerCase();
+          if (message.includes('metrika') || 
+              message.includes('err_blocked_by_client') ||
+              message.includes('yandex.ru') ||
+              message.includes('mc.yandex.ru') ||
+              message.includes('yastatic.net') ||
+              message.includes('tag_turbo') ||
+              message.includes('tag.js') ||
+              message.includes('third-party cookie') ||
+              message.includes('react devtools') ||
+              message.includes('content-security-policy') ||
+              message.includes('prefetch-src') ||
+              message.includes('container_is_hidden') ||
+              message.includes('unrecognized')) {
+            return; // Suppress these warnings
+          }
+          originalWarn.apply(console, args);
+        };
+        
+        // Suppress network errors (must be set early)
+        window.addEventListener('error', function(e) {
+          const filename = (e.filename || '').toLowerCase();
+          const message = (e.message || '').toLowerCase();
+          if (filename.includes('metrika') || 
+              filename.includes('yandex.ru') ||
+              filename.includes('mc.yandex.ru') ||
+              filename.includes('yastatic.net') ||
+              filename.includes('tag_turbo') ||
+              filename.includes('tag.js') ||
+              filename.includes('context.js') ||
+              message.includes('metrika') ||
+              message.includes('err_blocked_by_client') ||
+              message.includes('tag_turbo') ||
+              message.includes('container_is_hidden') ||
+              message.includes('content-security-policy') ||
+              message.includes('prefetch-src')) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+          }
+        }, true);
+        
+        // Suppress unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(e) {
+          const reason = String(e.reason || '').toLowerCase();
+          if (reason.includes('metrika') || 
+              reason.includes('yandex') ||
+              reason.includes('mc.yandex.ru') ||
+              reason.includes('tag_turbo') ||
+              reason.includes('container_is_hidden') ||
+              reason.includes('blocked')) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      })();
+    </script>
+    
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -116,103 +204,6 @@
     <link rel="stylesheet" crossorigin href="/assets/index-Bw1QlF7F.css">
   </head>
   <body>
-    <script>
-      // Suppress errors from blocked scripts (must be first!)
-      (function() {
-        // Suppress console errors for blocked resources
-        const originalError = console.error;
-        const originalWarn = console.warn;
-        
-        console.error = function(...args) {
-          const message = args.join(' ').toLowerCase();
-          if (message.includes('metrika') || 
-              message.includes('err_blocked_by_client') ||
-              message.includes('yandex.ru') ||
-              message.includes('mc.yandex.ru') ||
-              message.includes('tag_turbo') ||
-              message.includes('tag.js') ||
-              message.includes('third-party cookie') ||
-              message.includes('react devtools') ||
-              message.includes('content-security-policy') ||
-              message.includes('prefetch-src') ||
-              message.includes('container_is_hidden')) {
-            return; // Suppress these errors
-          }
-          originalError.apply(console, args);
-        };
-        
-        console.warn = function(...args) {
-          const message = args.join(' ').toLowerCase();
-          if (message.includes('metrika') || 
-              message.includes('err_blocked_by_client') ||
-              message.includes('yandex.ru') ||
-              message.includes('mc.yandex.ru') ||
-              message.includes('tag_turbo') ||
-              message.includes('tag.js') ||
-              message.includes('third-party cookie') ||
-              message.includes('react devtools') ||
-              message.includes('content-security-policy') ||
-              message.includes('prefetch-src') ||
-              message.includes('container_is_hidden') ||
-              message.includes('unrecognized content-security-policy')) {
-            return; // Suppress these warnings
-          }
-          originalWarn.apply(console, args);
-        };
-        
-        // Suppress network errors
-        window.addEventListener('error', function(e) {
-          const filename = (e.filename || '').toLowerCase();
-          const message = (e.message || '').toLowerCase();
-          if (filename.includes('metrika') || 
-              filename.includes('yandex.ru') ||
-              filename.includes('mc.yandex.ru') ||
-              filename.includes('yastatic.net') ||
-              filename.includes('tag_turbo') ||
-              filename.includes('tag.js') ||
-              message.includes('metrika') ||
-              message.includes('err_blocked_by_client') ||
-              message.includes('tag_turbo') ||
-              message.includes('container_is_hidden') ||
-              message.includes('content-security-policy') ||
-              message.includes('prefetch-src')) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            return false;
-          }
-        }, true);
-        
-        // Suppress network fetch errors for blocked resources
-        const originalFetch = window.fetch;
-        window.fetch = function(...args) {
-          return originalFetch.apply(this, args).catch(function(error) {
-            const url = (args[0] || '').toString().toLowerCase();
-            if (url.includes('mc.yandex.ru') || 
-                url.includes('yandex.ru/ads') ||
-                error.message && error.message.includes('blocked')) {
-              // Suppress blocked resource errors
-              return Promise.reject(new Error('Resource blocked by client'));
-            }
-            return Promise.reject(error);
-          });
-        };
-        
-        // Suppress unhandled promise rejections for blocked resources
-        window.addEventListener('unhandledrejection', function(e) {
-          const reason = String(e.reason || '').toLowerCase();
-          if (reason.includes('metrika') || 
-              reason.includes('yandex') ||
-              reason.includes('mc.yandex.ru') ||
-              reason.includes('tag_turbo') ||
-              reason.includes('container_is_hidden') ||
-              reason.includes('blocked')) {
-            e.preventDefault();
-            return false;
-          }
-        });
-      })();
-    </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105497016" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <div class="page-mask" id="page-mask"></div>
     <div id="root"></div>
