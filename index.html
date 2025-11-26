@@ -247,8 +247,8 @@
       }
 
     </style>
-    <script type="module" crossorigin src="/assets/index-BGc8mFiA.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CFVEPymq.css">
+    <script type="module" crossorigin src="/assets/index-vPGGsz0o.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-0IN6uJ9l.css">
   </head>
   <body>
     <noscript><div><img src="https://mc.yandex.ru/watch/105497016" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
@@ -262,6 +262,15 @@
           var m=document.getElementById('page-mask'); if(m) m.style.display='none';
         }, 150);
       });
+      
+      // Проверка загрузки приложения
+      setTimeout(function() {
+        var root = document.getElementById('root');
+        if (root && root.innerHTML.trim() === '') {
+          console.error('❌ React приложение не загрузилось! Проверьте консоль на ошибки.');
+          root.innerHTML = '<div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;"><h1 style="color: #dc2626;">Ошибка загрузки</h1><p>Приложение не загрузилось. Пожалуйста, обновите страницу или свяжитесь с администратором.</p><p style="color: #64748b; font-size: 14px; margin-top: 20px;">Если проблема сохраняется, проверьте консоль браузера (F12) на наличие ошибок.</p></div>';
+        }
+      }, 5000);
     </script>
     <!-- Yandex.RTB initialization -->
     <script>
