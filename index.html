@@ -82,7 +82,7 @@
         const originalLog = console.log;
         const originalInfo = console.info;
         
-        // Helper function to check if message should be suppressed
+          // Helper function to check if message should be suppressed
         function shouldSuppress(message) {
           const msg = String(message).toLowerCase();
           return msg.includes('metrika') || 
@@ -99,8 +99,7 @@
                  msg.includes('prefetch-src') ||
                  msg.includes('container_is_hidden') ||
                  msg.includes('unrecognized') ||
-                 msg.includes('_oncheckconfirm') ||
-                 msg.includes('failed to load resource');
+                 msg.includes('_oncheckconfirm');
         }
         
         console.error = function(...args) {
@@ -131,6 +130,7 @@
         window.addEventListener('error', function(e) {
           const filename = (e.filename || e.target?.src || '').toLowerCase();
           const message = (e.message || '').toLowerCase();
+          // Подавляем только ошибки от Яндекс сервисов и блокировщиков
           if (filename.includes('metrika') || 
               filename.includes('yandex.ru') ||
               filename.includes('mc.yandex.ru') ||
@@ -143,12 +143,23 @@
               message.includes('tag_turbo') ||
               message.includes('container_is_hidden') ||
               message.includes('content-security-policy') ||
-              message.includes('prefetch-src') ||
-              message.includes('failed to load')) {
+              message.includes('prefetch-src')) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
             return false;
+          }
+          // Для ошибок загрузки JS файлов - логируем, но не подавляем
+          if (filename.includes('index-') && filename.includes('.js') && e.target?.tagName === 'SCRIPT') {
+            console.warn('⚠️ Проблема загрузки JS файла:', filename);
+            // Пробуем перезагрузить страницу через 2 секунды, если приложение не загрузилось
+            setTimeout(function() {
+              var root = document.getElementById('root');
+              if (root && root.innerHTML.trim() === '') {
+                console.warn('⚠️ Попытка перезагрузки страницы...');
+                window.location.reload();
+              }
+            }, 2000);
           }
         }, true);
         
@@ -268,7 +279,24 @@
         var root = document.getElementById('root');
         if (root && root.innerHTML.trim() === '') {
           console.error('❌ React приложение не загрузилось! Проверьте консоль на ошибки.');
-          root.innerHTML = '<div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;"><h1 style="color: #dc2626;">Ошибка загрузки</h1><p>Приложение не загрузилось. Пожалуйста, обновите страницу или свяжитесь с администратором.</p><p style="color: #64748b; font-size: 14px; margin-top: 20px;">Если проблема сохраняется, проверьте консоль браузера (F12) на наличие ошибок.</p></div>';
+          // Проверяем, загрузились ли скрипты
+          var scripts = document.querySelectorAll('script[type="module"]');
+          var mainScriptLoaded = false;
+          scripts.forEach(function(script) {
+            if (script.src && script.src.includes('main.jsx')) {
+              mainScriptLoaded = true;
+            }
+          });
+          
+          if (!mainScriptLoaded) {
+            console.error('❌ Основной скрипт не загрузился. Попытка перезагрузки...');
+            setTimeout(function() {
+              window.location.reload();
+            }, 1000);
+            return;
+          }
+          
+          root.innerHTML = '<div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;"><h1 style="color: #dc2626;">Ошибка загрузки</h1><p>Приложение не загрузилось. Пожалуйста, обновите страницу или свяжитесь с администратором.</p><p style="color: #64748b; font-size: 14px; margin-top: 20px;">Если проблема сохраняется, проверьте консоль браузера (F12) на наличие ошибок.</p><button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #1565c0; color: white; border: none; border-radius: 4px; cursor: pointer;">Обновить страницу</button></div>';
         }
       }, 5000);
     </script>
