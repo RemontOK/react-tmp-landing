@@ -6,7 +6,7 @@ Allow: /src/
 Allow: /public/
 
 # Указываем расположение sitemap
-Sitemap: https://техметпром.рф/sitemap.xml
+Sitemap: https://xn--e1aaubjfhld1a.xn--p1ai/sitemap.xml
 
 # Запрещаем индексацию служебных файлов
 Disallow: /node_modules/
@@ -29,4 +29,4 @@ Allow: /*.webp
 Allow: /*.svg
 Allow: /*.mp4
 Allow: /*.webm
-Allow: /*.m4v 
+Allow: /*.m4v
